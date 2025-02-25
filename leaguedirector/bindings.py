@@ -2,9 +2,9 @@ import threading
 import functools
 import platform
 from ctypes import *
-from PySide6.QtGui import *
-from PySide6.QtCore import *
-from PySide6.QtWidgets import *
+from PySide2.QtGui import *
+from PySide2.QtCore import *
+from PySide2.QtWidgets import *
 
 
 class KeyboardHook(QThread):
@@ -50,7 +50,7 @@ class KeyboardHook(QThread):
         windll.user32.PostThreadMessageA(self.tid, 18, 0, 0)
 
     def run_windows(self):
-        from ctypes.wintypes import DWORD, WPARAM, LPARAM, MSG, HANDLE, HMODULE, LPCWSTR
+        from ctypes.wintypes import DWORD, WPARAM, LPARAM, MSG
 
         class KBDLLHOOKSTRUCT(Structure):
             _fields_ = [
@@ -67,12 +67,9 @@ class KeyboardHook(QThread):
             if pid.value == self.pid:
                 windll.user32.SendMessageA(self.window.winId(), wParam, lParam.contents.vk_code, 0)
             return windll.user32.CallNextHookEx(None, nCode, wParam, lParam)
-
+ 
         function = CFUNCTYPE(c_int, WPARAM, LPARAM, POINTER(KBDLLHOOKSTRUCT))(callback)
-        windll.kernel32.GetModuleHandleW.restype = HMODULE
-        windll.kernel32.GetModuleHandleW.argtypes = [LPCWSTR]
-        windll.user32.SetWindowsHookExA.argtypes = (c_int, HANDLE, HMODULE, DWORD)
-        hook = windll.user32.SetWindowsHookExA(13, function, windll.kernel32.GetModuleHandleW(None), 0)
+        hook = windll.user32.SetWindowsHookExW(13, function, windll.kernel32.GetModuleHandleW(None), 0)
 
         msg = POINTER(MSG)()
         while self.running:

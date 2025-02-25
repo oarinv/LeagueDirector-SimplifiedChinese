@@ -3,16 +3,18 @@ import psutil
 import platform
 import logging
 import subprocess
-from PySide6.QtCore import *
+from PySide2.QtCore import *
 
 def findWindowsInstalled(paths):
     """
     Find games installs in the windows registry.
     """
-    settings = QSettings('HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall', QSettings.NativeFormat);
+    settings = QSettings('HKEY_LOCAL_MACHINE\\SOFTWARE\\WOW6432Node', QSettings.NativeFormat);
+    settings.beginGroup('Riot Games, Inc')
     for key in settings.allKeys():
-        if key.startswith('Riot Game league_of_legends') and key.endswith('InstallLocation'):
+        if key.endswith('/Location'):
             paths.append(settings.value(key))
+    settings.endGroup()
 
 def findWindowsRunning(paths):
     """
@@ -23,8 +25,8 @@ def findWindowsRunning(paths):
         path = process.info['exe']
         if name == 'leagueclient.exe' and '\\RADS' in path:
             paths.append(path.split('\\RADS')[0])
-        if name == 'leagueclient.exe' and '\\LeagueClient.exe' in path:
-            paths.append(os.path.join(path.split('\\LeagueClient.exe')[0]))
+        if name == 'leagueclient.exe' and '\\LeagueClient\\' in path:
+            paths.append(os.path.join(path.split('\\LeagueClient')[0]))
         elif name in ('launcher.exe', 'singleplayertool.exe') and 'DevRoot' in path:
             paths.append(os.path.join(path.split('\\DevRoot')[0], 'DevRoot'))
 
@@ -80,13 +82,13 @@ def configFilePath(path):
     path = os.path.abspath(path)
     if platform.system() == 'Darwin':
         path = os.path.join(path, 'Contents', 'LoL')
-    config = os.path.join(path, 'DATA', 'CFG', 'game.cfg')
-    if os.path.isfile(config):
-        return config
     config = os.path.join(path, 'Config', 'game.cfg')
     if os.path.isfile(config):
         return config
     config = os.path.join(path, 'Game', 'Config', 'game.cfg')
+    if os.path.isfile(config):
+        return config
+    config = os.path.join(path, 'DATA', 'CFG', 'game.cfg')
     if os.path.isfile(config):
         return config
 

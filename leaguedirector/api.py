@@ -5,8 +5,8 @@ import copy
 import logging
 import functools
 from leaguedirector.widgets import userpath
-from PySide6.QtCore import *
-from PySide6.QtNetwork import *
+from PySide2.QtCore import *
+from PySide2.QtNetwork import *
 
 
 class Resource(QObject):
@@ -23,9 +23,9 @@ class Resource(QObject):
     network     = None
 
     def __init__(self):
-        super(Resource, self).__setattr__('timestamp', time.time())
+        object.__setattr__(self, 'timestamp', time.time())
         for name, default in self.fields.items():
-            super(Resource, self).__setattr__(name, default)
+            object.__setattr__(self, name, default)
         QObject.__init__(self)
 
     def __setattr__(self, name, value):
@@ -33,10 +33,10 @@ class Resource(QObject):
             if self.readonly:
                 raise AttributeError("Resource is readonly")
             if getattr(self, name) != value:
-                super(Resource, self).__setattr__(name, value)
+                object.__setattr__(self, name, value)
                 self.update({name: value})
         else:
-            super(Resource, self).__setattr__(name, value)
+            object.__setattr__(self, name, value)
 
     def sslErrors(self, response, errors):
         allowed = [QSslError.CertificateUntrusted, QSslError.HostNameMismatch]
@@ -48,9 +48,7 @@ class Resource(QObject):
             os.environ['PATH'] = os.path.abspath('resources') + os.pathsep + os.environ['PATH']
 
             # Then setup our certificate for the lol game client
-            configuration = QSslConfiguration.defaultConfiguration()
-            configuration.addCaCertificates(QSslCertificate.fromPath(os.path.abspath('resources/riotgames.pem')))
-            QSslConfiguration.setDefaultConfiguration(configuration)
+            QSslSocket.addDefaultCaCertificates(os.path.abspath('resources/riotgames.pem'))
             Resource.network = QNetworkAccessManager(QCoreApplication.instance())
             Resource.network.sslErrors.connect(self.sslErrors)
         return Resource.network
@@ -68,7 +66,7 @@ class Resource(QObject):
         return {name: getattr(self, name) for name in self.fields}
 
     def keys(self):
-        return list(self.fields)
+        return self.fields.keys()
 
     def update(self, data=None):
         request = QNetworkRequest(QUrl(self.host + self.url))
@@ -95,7 +93,7 @@ class Resource(QObject):
         if not self.writeonly:
             for key, value in data.items():
                 if key in self.fields:
-                    super(Resource, self).__setattr__(key, value)
+                    object.__setattr__(self, key, value)
 
 
 class Game(Resource):
@@ -509,7 +507,7 @@ class Sequence(Resource):
         if isinstance(data, dict):
             for key, value in data.items():
                 if value is not None:
-                    super(Resource, self).__setattr__(key, value)
+                    object.__setattr__(self, key, value)
             self.dataLoaded.emit()
 
     def sortData(self):
@@ -554,59 +552,59 @@ class Sequence(Resource):
 
     def getLabel(self, name):
         if name == 'cameraPosition':
-            return '摄像机坐标'
+            return 'Camera Position'
         if name == 'cameraRotation':
-            return '摄像机旋转'
+            return 'Camera Rotation'
         if name == 'playbackSpeed':
-            return '回放速度'
+            return 'Playback Speed'
         if name == 'fieldOfView':
-            return '视野'
+            return 'Field Of View'
         if name == 'nearClip':
-            return '近裁剪'
+            return 'Near Clip'
         if name == 'farClip':
-            return '远裁剪'
+            return 'Far Clip'
         if name == 'navGridOffset':
-            return '地平线偏移'
+            return 'Nav Grid Offset'
         if name == 'skyboxRotation':
-            return '水平翻转'
+            return 'Skybox Rotation'
         if name == 'skyboxRadius':
-            return '半径'
+            return 'Skybox Radius'
         if name == 'skyboxOffset':
-            return '偏移'
+            return 'Skybox Offset'
         if name == 'sunDirection':
-            return '太阳方向'
+            return 'Sun Direction'
         if name == 'depthFogEnabled':
-            return '深度雾'
+            return 'Depth Fog Enable'
         if name == 'depthFogStart':
-            return '深度雾起始'
+            return 'Depth Fog Start'
         if name == 'depthFogEnd':
-            return '深度雾结束'
+            return 'Depth Fog End'
         if name == 'depthFogIntensity':
-            return '浓度'
+            return 'Depth Fog Intensity'
         if name == 'depthFogColor':
-            return '颜色'
+            return 'Depth Fog Color'
         if name == 'heightFogEnabled':
-            return '高度雾'
+            return 'Height Fog Enabled'
         if name == 'heightFogStart':
-            return '高度雾起始'
+            return 'Height Fog Start'
         if name == 'heightFogEnd':
-            return '高度雾结束'
+            return 'Height Fog End'
         if name == 'heightFogIntensity':
-            return '浓度'
+            return 'Height Fog Intensity'
         if name == 'heightFogColor':
-            return '颜色'
+            return 'Height Fog Color'
         if name == 'depthOfFieldEnabled':
-            return '模糊'
+            return 'DOF Enabled'
         if name == 'depthOfFieldCircle':
-            return '圆形'
+            return 'DOF Circle'
         if name == 'depthOfFieldWidth':
-            return '宽度'
+            return 'DOF Width'
         if name == 'depthOfFieldNear':
-            return '近裁剪'
+            return 'DOF Near'
         if name == 'depthOfFieldMid':
-            return '中裁剪'
+            return 'DOF Mid'
         if name == 'depthOfFieldFar':
-            return '远裁剪'
+            return 'DOF Far'
         return name
 
     def getValue(self, name):

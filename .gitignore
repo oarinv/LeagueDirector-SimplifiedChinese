@@ -1,9 +1,6 @@
 */__pycache__/*
 *.DS_Store
-*.vscode
 *.venv
-/uv.lock
-
+resources/skyboxes/*.dds
 build/out
-build/autograph*
-build/signtool*
+uv.lock
