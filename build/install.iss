@@ -14,7 +14,7 @@ SetupIconFile=..\resources\icon.ico
 LicenseFile=..\LICENSE
 
 [Files]
-Source: "out\dist\LeagueDirector\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs
+Source: "dist\LeagueDirector\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs
 
 [Icons]
 Name: "{group}\League Director"; Filename: "{app}\LeagueDirector.exe"
