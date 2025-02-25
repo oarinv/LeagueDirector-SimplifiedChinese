@@ -3,5 +3,5 @@ name = "leaguedirector-simplifiedchinese"
 version = "0.1.4"
 description = "Add your description here"
 readme = "README.md"
-requires-python = ">=3.11"
+requires-python = "==3.11.9"
 dependencies = ["psutil==5.9.8", "pyside6==6.6.3.1"]
