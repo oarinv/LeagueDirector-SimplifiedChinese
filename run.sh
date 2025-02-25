@@ -1,4 +1,4 @@
 #!/bin/bash
 uv venv .venv
-uv pip install
+uv sync
 uv run -m leaguedirector.app
