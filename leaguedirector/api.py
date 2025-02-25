@@ -552,59 +552,59 @@ class Sequence(Resource):
 
     def getLabel(self, name):
         if name == 'cameraPosition':
-            return 'Camera Position'
+            return '相机位置'  # 原：'Camera Position'
         if name == 'cameraRotation':
-            return 'Camera Rotation'
+            return '相机旋转'  # 原：'Camera Rotation'
         if name == 'playbackSpeed':
-            return 'Playback Speed'
+            return '播放速度'  # 原：'Playback Speed'
         if name == 'fieldOfView':
-            return 'Field Of View'
+            return '视野范围'  # 原：'Field Of View'
         if name == 'nearClip':
-            return 'Near Clip'
+            return '近裁剪面'  # 原：'Near Clip'
         if name == 'farClip':
-            return 'Far Clip'
+            return '远裁剪面'  # 原：'Far Clip'
         if name == 'navGridOffset':
-            return 'Nav Grid Offset'
+            return '导航网格偏移'  # 原：'Nav Grid Offset'
         if name == 'skyboxRotation':
-            return 'Skybox Rotation'
+            return '天空盒旋转'  # 原：'Skybox Rotation'
         if name == 'skyboxRadius':
-            return 'Skybox Radius'
+            return '天空盒半径'  # 原：'Skybox Radius'
         if name == 'skyboxOffset':
-            return 'Skybox Offset'
+            return '天空盒偏移'  # 原：'Skybox Offset'
         if name == 'sunDirection':
-            return 'Sun Direction'
+            return '太阳方向'  # 原：'Sun Direction'
         if name == 'depthFogEnabled':
-            return 'Depth Fog Enable'
+            return '深度雾启用'  # 原：'Depth Fog Enable'
         if name == 'depthFogStart':
-            return 'Depth Fog Start'
+            return '深度雾起点'  # 原：'Depth Fog Start'
         if name == 'depthFogEnd':
-            return 'Depth Fog End'
+            return '深度雾终点'  # 原：'Depth Fog End'
         if name == 'depthFogIntensity':
-            return 'Depth Fog Intensity'
+            return '深度雾强度'  # 原：'Depth Fog Intensity'
         if name == 'depthFogColor':
-            return 'Depth Fog Color'
+            return '深度雾颜色'  # 原：'Depth Fog Color'
         if name == 'heightFogEnabled':
-            return 'Height Fog Enabled'
+            return '高度雾启用'  # 原：'Height Fog Enabled'
         if name == 'heightFogStart':
-            return 'Height Fog Start'
+            return '高度雾起点'  # 原：'Height Fog Start'
         if name == 'heightFogEnd':
-            return 'Height Fog End'
+            return '高度雾终点'  # 原：'Height Fog End'
         if name == 'heightFogIntensity':
-            return 'Height Fog Intensity'
+            return '高度雾强度'  # 原：'Height Fog Intensity'
         if name == 'heightFogColor':
-            return 'Height Fog Color'
+            return '高度雾颜色'  # 原：'Height Fog Color'
         if name == 'depthOfFieldEnabled':
-            return 'DOF Enabled'
+            return '景深启用'  # 原：'DOF Enabled'
         if name == 'depthOfFieldCircle':
-            return 'DOF Circle'
+            return '景深圆形范围'  # 原：'DOF Circle'
         if name == 'depthOfFieldWidth':
-            return 'DOF Width'
+            return '景深宽度'  # 原：'DOF Width'
         if name == 'depthOfFieldNear':
-            return 'DOF Near'
+            return '景深近距离'  # 原：'DOF Near'
         if name == 'depthOfFieldMid':
-            return 'DOF Mid'
+            return '景深中距离'  # 原：'DOF Mid'
         if name == 'depthOfFieldFar':
-            return 'DOF Far'
+            return '景深远距离'  # 原：'DOF Far'
         return name
 
     def getValue(self, name):
