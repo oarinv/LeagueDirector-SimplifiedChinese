@@ -1,0 +1,10 @@
+[project]
+name = "leaguedirector-simplifiedchinese"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "psutil==5.9.8",
+    "pyside6==6.6.3.1",
+]
