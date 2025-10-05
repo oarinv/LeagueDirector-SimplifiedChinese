@@ -36,7 +36,7 @@ class KeybindingsWindow(QScrollArea):
         self.fields = {}
         self.bindings = bindings
         self.setWidgetResizable(True)
-        self.setWindowTitle('Key Bindings')
+        self.setWindowTitle('快捷键设置')
         self.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
         widget = QWidget()
         layout = QFormLayout()
@@ -45,7 +45,7 @@ class KeybindingsWindow(QScrollArea):
             field = QKeySequenceEdit(QKeySequence(value))
             field.keySequenceChanged.connect(functools.partial(self.edited, name, field))
             clear = QPushButton()
-            clear.setToolTip('Clear Key Binding')
+            clear.setToolTip('清除快捷键')
             clear.setFixedWidth(20)
             clear.setIcon(self.style().standardIcon(QStyle.SP_DialogCloseButton))
             clear.clicked.connect(functools.partial(self.clear, name, field))
@@ -53,7 +53,7 @@ class KeybindingsWindow(QScrollArea):
             binding.addWidget(clear)
             layout.addRow(self.bindings.getLabel(name), binding)
             self.fields[name] = field
-        reset = QPushButton('Reset To Defaults')
+        reset = QPushButton('恢复默认')
         reset.clicked.connect(self.reset)
         layout.addRow('', reset)
         widget.setLayout(layout)
@@ -75,34 +75,34 @@ class KeybindingsWindow(QScrollArea):
 
 class VisibleWindow(QScrollArea):
     options = [
-        ('fogOfWar', 'show_fog_of_war', 'Show Fog Of War?'),
-        ('outlineSelect', 'show_selected_outline', 'Show Selected Outline?'),
-        ('outlineHover', 'show_hover_outline', 'Show Hover Outline?'),
-        ('floatingText', 'show_floating_text', 'Show Floating Text?'),
-        ('interfaceAll', 'show_interface_all', 'Show UI?'),
-        ('interfaceReplay', 'show_interface_replay', 'Show UI Replay?'),
-        ('interfaceScore', 'show_interface_score', 'Show UI Score?'),
-        ('interfaceScoreboard', 'show_interface_scoreboard', 'Show UI Scoreboard?'),
-        ('interfaceFrames', 'show_interface_frames', 'Show UI Frames?'),
-        ('interfaceMinimap', 'show_interface_minimap', 'Show UI Minimap?'),
-        ('interfaceTimeline', 'show_interface_timeline', 'Show UI Timeline?'),
-        ('interfaceChat', 'show_interface_chat', 'Show UI Chat?'),
-        ('interfaceTarget', 'show_interface_target', 'Show UI Target?'),
-        ('interfaceQuests', 'show_interface_quests', 'Show UI Quests?'),
-        ('interfaceAnnounce', 'show_interface_announce', 'Show UI Announcements?'),
-        ('interfaceKillCallouts', 'show_interface_killcallouts', 'Show Kill Callouts?'),
-        ('interfaceNeutralTimers', 'show_interface_neutraltimers', 'Show Neutral Timers?'),
-        ('healthBarChampions', 'show_healthbar_champions', 'Show Health Champions?'),
-        ('healthBarStructures', 'show_healthbar_structures', 'Show Health Structures?'),
-        ('healthBarWards', 'show_healthbar_wards', 'Show Health Wards?'),
-        ('healthBarPets', 'show_healthbar_pets', 'Show Health Pets?'),
-        ('healthBarMinions', 'show_healthbar_minions', 'Show Health Minions?'),
-        ('environment', 'show_environment', 'Show Environment?'),
-        ('characters', 'show_characters', 'Show Characters?'),
-        ('champions', 'show_champions', 'Show Champions?'),
-        ('minions', 'show_minions', 'Show Minions?'),
-        ('particles', 'show_particles', 'Show Particles?'),
-        ('banners', 'show_banners', 'Show Banners?'),
+        ('fogOfWar', 'show_fog_of_war', '显示战争迷雾？'),
+        ('outlineSelect', 'show_selected_outline', '显示选中轮廓？'),
+        ('outlineHover', 'show_hover_outline', '显示悬停轮廓？'),
+        ('floatingText', 'show_floating_text', '显示浮动文字？'),
+        ('interfaceAll', 'show_interface_all', '显示界面？'),
+        ('interfaceReplay', 'show_interface_replay', '显示回放界面？'),
+        ('interfaceScore', 'show_interface_score', '显示得分？'),
+        ('interfaceScoreboard', 'show_interface_scoreboard', '显示计分板？'),
+        ('interfaceFrames', 'show_interface_frames', '显示帧数？'),
+        ('interfaceMinimap', 'show_interface_minimap', '显示小地图？'),
+        ('interfaceTimeline', 'show_interface_timeline', '显示时间轴？'),
+        ('interfaceChat', 'show_interface_chat', '显示聊天？'),
+        ('interfaceTarget', 'show_interface_target', '显示目标？'),
+        ('interfaceQuests', 'show_interface_quests', '显示任务？'),
+        ('interfaceAnnounce', 'show_interface_announce', '显示公告？'),
+        ('interfaceKillCallouts', 'show_interface_killcallouts', '显示击杀提示？'),
+        ('interfaceNeutralTimers', 'show_interface_neutraltimers', '显示中立计时器？'),
+        ('healthBarChampions', 'show_healthbar_champions', '显示英雄血条？'),
+        ('healthBarStructures', 'show_healthbar_structures', '显示建筑血条？'),
+        ('healthBarWards', 'show_healthbar_wards', '显示守卫血条？'),
+        ('healthBarPets', 'show_healthbar_pets', '显示宠物血条？'),
+        ('healthBarMinions', 'show_healthbar_minions', '显示小兵血条？'),
+        ('environment', 'show_environment', '显示环境？'),
+        ('characters', 'show_characters', '显示角色？'),
+        ('champions', 'show_champions', '显示英雄？'),
+        ('minions', 'show_minions', '显示小兵？'),
+        ('particles', 'show_particles', '显示粒子效果？'),
+        ('banners', 'show_banners', '显示旗帜？'),
     ]
 
     def __init__(self, api):
@@ -114,7 +114,7 @@ class VisibleWindow(QScrollArea):
         self.bindings = {}
         self.setWidgetResizable(True)
         self.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
-        self.setWindowTitle('Visibility')
+        self.setWindowTitle('可见性设置')
         widget = QWidget()
         layout = QFormLayout()
         for name, binding, label in self.options:
@@ -250,51 +250,50 @@ class RenderWindow(QScrollArea):
 
         widget = QWidget()
         layout = QFormLayout()
-        layout.addRow('Camera Mode', self.cameraMode)
-        layout.addRow('Camera Lock', HBoxWidget(self.cameraLockX, self.cameraLockY, self.cameraLockZ))
-        layout.addRow('Camera Move Back To', HBoxWidget(self.cameraMoveBackX, self.cameraMoveBackY, self.cameraMoveBackZ))
-        layout.addRow('Camera Position', self.cameraPosition)
-        layout.addRow('Camera Position', self.cameraPosition)
-        layout.addRow('Camera Rotation', self.cameraRotation)
-        layout.addRow('Camera Attached', self.cameraAttached)
-        layout.addRow('Camera Move Speed', self.cameraMoveSpeed)
-        layout.addRow('Camera Look Speed', self.cameraLookSpeed)
-        layout.addRow('Field of View', self.fieldOfView)
-        layout.addRow('Near Clip', self.nearClip)
-        layout.addRow('Far Clip', self.farClip)
-        layout.addRow('Nav Grid Offset', self.navGrid)
-        layout.addRow('Simulate All Particles While Offscreen', self.simulateAllParticlesWhileOffScreen)
+        layout.addRow('相机模式', self.cameraMode)
+        layout.addRow('锁定轴', HBoxWidget(self.cameraLockX, self.cameraLockY, self.cameraLockZ))
+        layout.addRow('相机回退到', HBoxWidget(self.cameraMoveBackX, self.cameraMoveBackY, self.cameraMoveBackZ))
+        layout.addRow('相机位置', self.cameraPosition)
+        layout.addRow('相机旋转', self.cameraRotation)
+        layout.addRow('附加相机', self.cameraAttached)
+        layout.addRow('相机移动速度', self.cameraMoveSpeed)
+        layout.addRow('相机旋转速度', self.cameraLookSpeed)
+        layout.addRow('视野角度(FOV)', self.fieldOfView)
+        layout.addRow('近平面裁剪', self.nearClip)
+        layout.addRow('远平面裁剪', self.farClip)
+        layout.addRow('导航网格偏移', self.navGrid)
+        layout.addRow('关闭屏幕外粒子模拟', self.simulateAllParticlesWhileOffScreen)
         layout.addRow(Separator())
-        layout.addRow('Skybox', self.skyboxes)
-        layout.addRow('Skybox Rotation', self.skyboxRotation)
-        layout.addRow('Skybox Offset', self.skyboxOffset)
-        layout.addRow('Skybox Radius', self.skyboxRadius)
-        layout.addRow('Sun Direction', self.sunDirection)
+        layout.addRow('天空盒', self.skyboxes)
+        layout.addRow('天空盒旋转', self.skyboxRotation)
+        layout.addRow('天空盒偏移', self.skyboxOffset)
+        layout.addRow('天空盒半径', self.skyboxRadius)
+        layout.addRow('太阳方向', self.sunDirection)
         layout.addRow(Separator())
-        layout.addRow('Depth Fog', self.depthFogEnabled)
-        layout.addRow('Depth Fog Start', self.depthFogStart)
-        layout.addRow('Depth Fog End', self.depthFogEnd)
-        layout.addRow('Depth Fog Intensity', self.depthFogIntensity)
-        layout.addRow('Depth Fog Color', self.depthFogColor)
+        layout.addRow('深度雾启用', self.depthFogEnabled)
+        layout.addRow('深度雾起始', self.depthFogStart)
+        layout.addRow('深度雾结束', self.depthFogEnd)
+        layout.addRow('深度雾强度', self.depthFogIntensity)
+        layout.addRow('深度雾颜色', self.depthFogColor)
         layout.addRow(Separator())
-        layout.addRow('Height Fog', self.heightFogEnabled)
-        layout.addRow('Height Fog Start', self.heightFogStart)
-        layout.addRow('Height Fog End', self.heightFogEnd)
-        layout.addRow('Height Fog Intensity', self.heightFogIntensity)
-        layout.addRow('Height Fog Color', self.heightFogColor)
+        layout.addRow('高度雾启用', self.heightFogEnabled)
+        layout.addRow('高度雾起始', self.heightFogStart)
+        layout.addRow('高度雾结束', self.heightFogEnd)
+        layout.addRow('高度雾强度', self.heightFogIntensity)
+        layout.addRow('高度雾颜色', self.heightFogColor)
         layout.addRow(Separator())
-        layout.addRow('Depth of Field', self.depthOfFieldEnabled)
-        layout.addRow('Depth of Field Debug', self.depthOfFieldDebug)
-        layout.addRow('Depth of Field Circle', self.depthOfFieldCircle)
-        layout.addRow('Depth of Field Width', self.depthOfFieldWidth)
-        layout.addRow('Depth of Field Near', self.depthOfFieldNear)
-        layout.addRow('Depth of Field Mid', self.depthOfFieldMid)
-        layout.addRow('Depth of Field Far', self.depthOfFieldFar)
+        layout.addRow('景深启用', self.depthOfFieldEnabled)
+        layout.addRow('景深调试', self.depthOfFieldDebug)
+        layout.addRow('景深光圈', self.depthOfFieldCircle)
+        layout.addRow('景深宽度', self.depthOfFieldWidth)
+        layout.addRow('景深近焦', self.depthOfFieldNear)
+        layout.addRow('景深中焦', self.depthOfFieldMid)
+        layout.addRow('景深远焦', self.depthOfFieldFar)
         widget.setLayout(layout)
         self.setWidgetResizable(True)
         self.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
         self.setWidget(widget)
-        self.setWindowTitle('Rendering')
+        self.setWindowTitle('渲染设置')
 
     def update(self):
         self.cameraLockX.update(self.api.render.cameraLockX)
@@ -350,14 +349,14 @@ class ParticlesWindow(VBoxWidget):
         self.api.particles.updated.connect(self.update)
         self.items = {}
         self.search = QLineEdit()
-        self.search.setPlaceholderText('Search...')
+        self.search.setPlaceholderText('搜索粒子...')
         self.search.textEdited.connect(self.textEdited)
         self.list = QListWidget()
         self.list.setSortingEnabled(True)
         self.list.itemChanged.connect(self.itemChanged)
         self.addWidget(self.search)
         self.addWidget(self.list)
-        self.setWindowTitle('Particles')
+        self.setWindowTitle('粒子效果')
 
     def textEdited(self, text):
         search = text.lower()
@@ -414,14 +413,14 @@ class RecordingWindow(VBoxWidget):
         self.outputLabel.setOpenExternalLinks(True)
 
         self.outputButton = QPushButton()
-        self.outputButton.setToolTip('Change Output Directory')
+        self.outputButton.setToolTip('更改输出目录')
         self.outputButton.setFixedWidth(30)
         self.outputButton.setIcon(self.style().standardIcon(QStyle.SP_FileDialogStart))
         self.outputButton.clicked.connect(self.selectOutputDirectory)
 
-        self.button = QPushButton('Record')
+        self.button = QPushButton('开始录制')
         self.button.clicked.connect(self.startRecording)
-        self.button2 = QPushButton('Record Sequence')
+        self.button2 = QPushButton('录制序列')
         self.button2.clicked.connect(self.recordSequence)
         self.list = QListWidget()
         self.list.setSortingEnabled(True)
@@ -429,29 +428,29 @@ class RecordingWindow(VBoxWidget):
 
         self.form = QWidget(self)
         self.formLayout = QFormLayout(self.form)
-        self.formLayout.addRow('Codec', self.codec)
-        self.formLayout.addRow('Start Time', self.startTime)
-        self.formLayout.addRow('End Time', self.endTime)
-        self.formLayout.addRow('Frames Per Second', self.fps)
-        self.formLayout.addRow('Lossless Encoding', self.lossless)
-        self.formLayout.addRow('Output Directory', HBoxWidget(self.outputButton, self.outputLabel))
+        self.formLayout.addRow('编码格式', self.codec)  # Codec
+        self.formLayout.addRow('开始时间', self.startTime)  # Start Time
+        self.formLayout.addRow('结束时间', self.endTime)  # End Time
+        self.formLayout.addRow('帧率(FPS)', self.fps)  # Frames Per Second
+        self.formLayout.addRow('无损编码', self.lossless)  # Lossless Encoding
+        self.formLayout.addRow('输出目录', HBoxWidget(self.outputButton, self.outputLabel))  # Output Directory
         self.formLayout.addRow(HBoxWidget(self.button, self.button2))
         self.formLayout.addRow(self.list)
         self.form.setLayout(self.formLayout)
 
         self.render = QWidget(self)
         self.progress = QProgressBar()
-        self.cancel = QPushButton('Cancel Recording')
+        self.cancel = QPushButton('取消录制')
         self.cancel.clicked.connect(self.stopRecording)
         self.renderLayout = QFormLayout()
-        self.renderLayout.addRow(QLabel('Rendering video...'))
+        self.renderLayout.addRow(QLabel('视频渲染中...'))
         self.renderLayout.addRow(self.progress)
         self.renderLayout.addRow(self.cancel)
         self.render.setLayout(self.renderLayout)
 
         self.addWidget(self.form)
         self.addWidget(self.render)
-        self.setWindowTitle('Recording')
+        self.setWindowTitle('录制')
 
     def update(self):
         self.startTime.setRange(0, self.api.playback.length)
@@ -467,7 +466,7 @@ class RecordingWindow(VBoxWidget):
                 self.recordings.add(self.api.recording.path)
 
     def selectOutputDirectory(self):
-        self.setOutputDirectory(QFileDialog.getExistingDirectory(self, 'Select Output Directory', self.outputPath))
+        self.setOutputDirectory(QFileDialog.getExistingDirectory(self, '选择输出目录', self.outputPath))
 
     def openRecording(self, item):
         QDesktopServices.openUrl(QUrl('file:///{}'.format(item.text())))
@@ -520,7 +519,7 @@ class TimelineWindow(QWidget):
         self.layoutTimeButtons(layout)
         self.layoutSlider(layout)
         self.layoutSequencer(layout)
-        self.setWindowTitle('Timeline')
+        self.setWindowTitle('时间轴')
         self.setLayout(layout)
 
     def saveSettings(self):
@@ -530,30 +529,30 @@ class TimelineWindow(QWidget):
         self.api.sequence.setDirectory(data.get('directory', userpath('sequences')))
 
     def selectDirectory(self):
-        self.api.sequence.setDirectory(QFileDialog.getExistingDirectory(self, 'Select Directory', self.api.sequence.directory))
+        self.api.sequence.setDirectory(QFileDialog.getExistingDirectory(self, '选择目录', self.api.sequence.directory))
 
     def layoutSequencer(self, layout):
         self.sequenceCombo = SequenceCombo(self.api)
         self.sequenceButton = QPushButton()
-        self.sequenceButton.setToolTip('Open Directory')
+        self.sequenceButton.setToolTip('打开目录')
         self.sequenceButton.setFixedWidth(30)
         self.sequenceButton.setIcon(self.style().standardIcon(QStyle.SP_FileDialogStart))
         self.sequenceButton.clicked.connect(self.selectDirectory)
         layout.addWidget(HBoxWidget(self.sequenceCombo, self.sequenceButton))
 
         widget = HBoxWidget()
-        self.applySequence = BooleanInput('Apply Sequence?')
+        self.applySequence = BooleanInput('应用序列？')
         self.applySequence.valueChanged.connect(self.api.sequence.setSequencing)
         widget.addWidget(self.applySequence)
-        playSequence = QPushButton('Play Sequence')
+        playSequence = QPushButton('播放序列')
         playSequence.setMaximumWidth(150)
         playSequence.clicked.connect(self.playSequence)
         widget.addWidget(playSequence)
-        copySequence = QPushButton('Copy Sequence')
+        copySequence = QPushButton('复制序列')
         copySequence.setMaximumWidth(150)
         copySequence.clicked.connect(self.copySequence)
         widget.addWidget(copySequence)
-        newSequence = QPushButton('New Sequence')
+        newSequence = QPushButton('新建序列')
         newSequence.setMaximumWidth(150)
         newSequence.clicked.connect(self.newSequence)
         widget.addWidget(newSequence)
@@ -610,12 +609,12 @@ class TimelineWindow(QWidget):
         self.api.playback.time = self.timeSlider.sliderPosition() / 1000
 
     def newSequence(self):
-        name, ok = QInputDialog.getText(self, 'Create New Sequence', 'Enter a name for your sequence')
+        name, ok = QInputDialog.getText(self, '创建新序列', '输入序列名称')
         if ok:
             self.api.sequence.create(name)
 
     def copySequence(self):
-        name, ok = QInputDialog.getText(self, 'Copy Sequence', 'Enter a name to save a new copy of your sequence')
+        name, ok = QInputDialog.getText(self, '复制序列', '输入新序列名称')
         if ok:
             self.api.sequence.copy(name)
 
@@ -722,13 +721,13 @@ class TimelineWindow(QWidget):
         self.applySequence.update(self.api.sequence.sequencing)
         if self.api.playback.seeking:
             self.play.setDisabled(True)
-            self.play.setText('Seeking')
+            self.play.setText('寻帧中')
         elif self.api.playback.paused:
             self.play.setDisabled(False)
-            self.play.setText('Play')
+            self.play.setText('播放')
         else:
             self.play.setDisabled(False)
-            self.play.setText('Pause')
+            self.play.setText('暂停')
 
 
 class Api(QObject):
@@ -843,16 +842,16 @@ class Api(QObject):
 class ConnectWindow(QDialog):
     def __init__(self):
         QDialog.__init__(self)
-        self.setWindowTitle('Ready To Connect')
+        self.setWindowTitle('准备连接')
         self.layout = QVBoxLayout()
         self.setLayout(self.layout)
         self.setWindowModality(Qt.WindowModal)
         self.welcome = QLabel()
         self.welcome.setText("""
-            <h3>Welcome to League Director!</h3>
+             <h3>欢迎使用 League Director!</h3>
             <p><a href="https://github.com/riotgames/leaguedirector/">https://github.com/riotgames/leaguedirector/</a></p>
-            <p>First ensure your game has enabled the <a href="https://developer.riotgames.com/replay-apis.html">Replay API</a> by checking the box next to your installation.</p>
-            <p>Once enabled, start up a replay in the League of Legends client and League Director will automatically connect.<br/></p>
+            <p>首先确保你的游戏已启用 <a href="https://developer.riotgames.com/replay-apis.html">回放 API</a>，可在安装目录旁的复选框中勾选。</p>
+            <p>启用后，在《英雄联盟》客户端中启动一个回放，League Director 会自动连接。<br/></p>
         """)
         self.welcome.setTextInteractionFlags(Qt.TextBrowserInteraction)
         self.welcome.setTextFormat(Qt.RichText)
@@ -882,7 +881,7 @@ class ConnectWindow(QDialog):
             item.setFlags(Qt.ItemIsUserCheckable | Qt.ItemIsEnabled)
             item.setCheckState(Qt.Checked if enabled else Qt.Unchecked)
             item.setBackground(QApplication.palette().alternateBase())
-            item.setStatusTip('Sup!')
+            item.setStatusTip('游戏状态')
             font = item.font()
             font.setPointSize(14)
             font.setBold(enabled)
@@ -893,15 +892,15 @@ class ConnectWindow(QDialog):
 class UpdateWindow(QDialog):
     def __init__(self):
         QDialog.__init__(self)
-        self.setWindowTitle('Update Available!')
+        self.setWindowTitle('有可用更新！')
         self.layout = QVBoxLayout()
         self.setLayout(self.layout)
         self.setWindowModality(Qt.WindowModal)
         self.welcome = QLabel()
         self.welcome.setText("""
-            <h3>A new version of League Director is available!</h3>
+            <h3>League Director 有新版本可用！</h3>
             <p><a href="https://github.com/riotgames/leaguedirector/releases/latest">https://github.com/riotgames/leaguedirector/releases/latest</a></p>
-            <p>Download the latest version by clicking the link above.</p>
+            <p>点击上方链接下载最新版。</p>
         """)
         self.welcome.setTextInteractionFlags(Qt.TextBrowserInteraction)
         self.welcome.setTextFormat(Qt.RichText)
@@ -933,7 +932,7 @@ class LeagueDirector(object):
         self.addWindow(ConnectWindow(), 'connect')
         self.addWindow(UpdateWindow(), 'update')
         self.window.setCentralWidget(self.mdi)
-        self.window.setWindowTitle('League Director')
+        self.window.setWindowTitle('英雄联盟导演工具')
         self.window.setWindowIcon(QIcon(respath('icon.ico')))
         self.window.closeEvent = self.closeEvent
         self.window.show()
@@ -964,8 +963,8 @@ class LeagueDirector(object):
         handler.setFormatter(formatter)
         logger.addHandler(handler)
         logger.setLevel(logging.INFO)
-        logging.info('Started League Director (%s)', leaguedirector.__version__)
-        logging.info('Using SSL (%s)', QSslSocket.sslLibraryVersionString())
+        logging.info('已启动英雄联盟导演工具 (%s)', leaguedirector.__version__)
+        logging.info('使用 SSL (%s)', QSslSocket.sslLibraryVersionString())
         qInstallMessageHandler(self.handleMessage)
 
     def checkUpdate(self):
@@ -995,109 +994,109 @@ class LeagueDirector(object):
 
     def setupBindings(self):
         return Bindings(self.window, self.settings.value('bindings', {}), [
-            ('play_pause',                  'Play / Pause',                     'Space'),
-            ('camera_up',                   'Camera Up',                        ''),
-            ('camera_down',                 'Camera Down',                      ''),
-            ('camera_yaw_left',             'Camera Yaw Left',                  ''),
-            ('camera_yaw_right',            'Camera Yaw Right',                 ''),
-            ('camera_pitch_up',             'Camera Pitch Up',                  ''),
-            ('camera_pitch_down',           'Camera Pitch Down',                ''),
-            ('camera_roll_left',            'Camera Roll Left',                 ''),
-            ('camera_roll_right',           'Camera Roll Right',                ''),
-            ('camera_move_speed_up',        'Camera Move Speed Up',             'Ctrl++'),
-            ('camera_move_speed_down',      'Camera Move Speed Down',           'Ctrl+-'),
-            ('camera_look_speed_up',        'Camera Look Speed Up',             ''),
-            ('camera_look_speed_down',      'Camera Look Speed Down',           ''),
-            ('camera_lock_x',               'Camera Lock X Axis',               ''),
-            ('camera_lock_y',               'Camera Lock Y Axis',               ''),
-            ('camera_lock_z',               'Camera Lock Z Axis',               ''),
-            ('camera_move_back_x',          'Camera Lock X Axis',               ''),
-            ('camera_move_back_y',          'Camera Lock Y Axis',               ''),
-            ('camera_move_back_z',          'Camera Lock Z Axis',               ''),
-            ('camera_attach',               'Camera Attach',                    ''),
-            ('camera_fov_up',               'Camera Increase Field of View',    ''),
-            ('camera_fov_down',             'Camera Decrease Field of View',    ''),
-            ('render_dof_near_up',          'Increase Depth of Field Near',     ''),
-            ('render_dof_near_down',        'Decrease Depth of Field Near',     ''),
-            ('render_dof_mid_up',           'Increase Depth of Field Mid',      ''),
-            ('render_dof_mid_down',         'Decrease Depth of Field Mid',      ''),
-            ('render_dof_far_up',           'Increase Depth of Field Far',      ''),
-            ('render_dof_far_down',         'Decrease Depth of Field Far',      ''),
-            ('show_fog_of_war',             'Show Fog of War',                  ''),
-            ('show_selected_outline',       'Show Selected Outline',            ''),
-            ('show_hover_outline',          'Show Hover Outline',               ''),
-            ('show_floating_text',          'Show Floating Text',               ''),
-            ('show_interface_all',          'Show UI All',                      ''),
-            ('show_interface_replay',       'Show UI Replay',                   ''),
-            ('show_interface_score',        'Show UI Score',                    ''),
-            ('show_interface_scoreboard',   'Show UI Scoreboard',               ''),
-            ('show_interface_frames',       'Show UI Frames',                   ''),
-            ('show_interface_minimap',      'Show UI Minimap',                  ''),
-            ('show_interface_timeline',     'Show UI Timeline',                 ''),
-            ('show_interface_chat',         'Show UI Chat',                     ''),
-            ('show_interface_target',       'Show UI Target',                   ''),
-            ('show_interface_quests',       'Show UI Quests',                   ''),
-            ('show_interface_announce',     'Show UI Announcements',            ''),
-            ('show_healthbar_champions',    'Show Health Champions',            ''),
-            ('show_healthbar_structures',   'Show Health Structures',           ''),
-            ('show_healthbar_wards',        'Show Health Wards',                ''),
-            ('show_healthbar_pets',         'Show Health Pets',                 ''),
-            ('show_healthbar_minions',      'Show Health Minions',              ''),
-            ('show_environment',            'Show Environment',                 ''),
-            ('show_characters',             'Show Characters',                  ''),
-            ('show_champions',             'Show Champions',                  ''),
-            ('show_minions',             'Show Minions',                  ''),
-            ('show_particles',              'Show Particles',                   ''),
-            ('sequence_play',               'Play Sequence',                    'Ctrl+Space'),
-            ('sequence_apply',              'Apply Sequence',                   '\\'),
-            ('sequence_new',                'New Sequence',                     'Ctrl+N'),
-            ('sequence_copy',               'Copy Sequence',                    ''),
-            ('sequence_clear',              'Clear Sequence',                   ''),
-            ('sequence_del_kf',             'Delete Keyframe',                  'Del'),
-            ('sequence_next_kf',            'Select Next Keyframe',             ''),
-            ('sequence_prev_kf',            'Select Prev Keyframe',             ''),
-            ('sequence_adj_kf',             'Select Adjacent Keyframes',        ''),
-            ('sequence_all_kf',             'Select All Keyframes',             'Ctrl+A'),
-            ('sequence_seek_kf',            'Seek To Keyframe',                 ''),
-            ('sequence_undo',               'Sequence Undo',                    'Ctrl+Z'),
-            ('sequence_redo',               'Sequence Redo',                    'Ctrl+Shift+Z'),
-            ('time_minus_120',              'Time -120 Seconds',                ''),
-            ('time_minus_60',               'Time -60 Seconds',                 ''),
-            ('time_minus_30',               'Time -30 Seconds',                 ''),
-            ('time_minus_10',               'Time -10 Seconds',                 ''),
-            ('time_minus_5',                'Time -5 Seconds',                  ''),
-            ('time_plus_5',                 'Time +5 Seconds',                  ''),
-            ('time_plus_10',                'Time +10 Seconds',                 ''),
-            ('time_plus_30',                'Time +30 Seconds',                 ''),
-            ('time_plus_60',                'Time +60 Seconds',                 ''),
-            ('time_plus_120',               'Time +120 Seconds',                ''),
-            ('kf_position',                 'Keyframe Position',                '+'),
-            ('kf_rotation',                 'Keyframe Rotation',                '+'),
-            ('kf_speed',                    'Keyframe Speed',                   ''),
-            ('kf_fov',                      'Keyframe Field of View',           ''),
-            ('kf_near_clip',                'Keyframe Near Clip',               ''),
-            ('kf_far_clip',                 'Keyframe Far Clip',                ''),
-            ('kf_nav_grid',                 'Keyframe Nav Grid Offset',         ''),
-            ('kf_sky_rotation',             'Keyframe Skybox Rotation',         ''),
-            ('kf_sky_radius',               'Keyframe Skybox Radius',           ''),
-            ('kf_sky_offset',               'Keyframe Skybox Offset',           ''),
-            ('kf_sun_direction',            'Keyframe Sun Direction',           ''),
-            ('kf_depth_fog_enable',         'Keyframe Depth Fog Enable',        ''),
-            ('kf_depth_fog_start',          'Keyframe Depth Fog Start',         ''),
-            ('kf_depth_fog_end',            'Keyframe Depth Fog End',           ''),
-            ('kf_depth_fog_intensity',      'Keyframe Depth Fog Intensity',     ''),
-            ('kf_depth_fog_color',          'Keyframe Depth Fog Color',         ''),
-            ('kf_height_fog_enable',        'Keyframe Height Fog Enable',       ''),
-            ('kf_height_fog_start',         'Keyframe Height Fog Start',        ''),
-            ('kf_height_fog_end',           'Keyframe Height Fog End',          ''),
-            ('kf_height_fog_intensity',     'Keyframe Height Fog Intensity',    ''),
-            ('kf_height_fog_color',         'Keyframe Height Fog Color',        ''),
-            ('kf_dof_enabled',              'Keyframe DOF Enabled',             ''),
-            ('kf_dof_circle',               'Keyframe DOF Circle',              ''),
-            ('kf_dof_width',                'Keyframe DOF Width',               ''),
-            ('kf_dof_near',                 'Keyframe DOF Near',                ''),
-            ('kf_dof_mid',                  'Keyframe DOF Mid',                 ''),
-            ('kf_dof_far',                  'Keyframe DOF Far',                 ''),
+            ('play_pause', '播放 / 暂停', 'Space'),
+            ('camera_up', '摄像机上移', ''),
+            ('camera_down', '摄像机下移', ''),
+            ('camera_yaw_left', '摄像机偏航向左', ''),
+            ('camera_yaw_right', '摄像机偏航向右', ''),
+            ('camera_pitch_up', '摄像机俯仰向上', ''),
+            ('camera_pitch_down', '摄像机俯仰向下', ''),
+            ('camera_roll_left', '摄像机滚转向左', ''),
+            ('camera_roll_right', '摄像机滚转向右', ''),
+            ('camera_move_speed_up', '摄像机移动速度加快', 'Ctrl++'),
+            ('camera_move_speed_down', '摄像机移动速度减慢', 'Ctrl+-'),
+            ('camera_look_speed_up', '摄像机视角旋转速度加快', ''),
+            ('camera_look_speed_down', '摄像机视角旋转速度减慢', ''),
+            ('camera_lock_x', '锁定 X 轴', ''),
+            ('camera_lock_y', '锁定 Y 轴', ''),
+            ('camera_lock_z', '锁定 Z 轴', ''),
+            ('camera_move_back_x', '反向移动 X 轴', ''),
+            ('camera_move_back_y', '反向移动 Y 轴', ''),
+            ('camera_move_back_z', '反向移动 Z 轴', ''),
+            ('camera_attach', '摄像机附着', ''),
+            ('camera_fov_up', '增加视野', ''),
+            ('camera_fov_down', '减少视野', ''),
+            ('render_dof_near_up', '增加景深近处', ''),
+            ('render_dof_near_down', '减少景深近处', ''),
+            ('render_dof_mid_up', '增加景深中间', ''),
+            ('render_dof_mid_down', '减少景深中间', ''),
+            ('render_dof_far_up', '增加景深远处', ''),
+            ('render_dof_far_down', '减少景深远处', ''),
+            ('show_fog_of_war', '显示战争迷雾', ''),
+            ('show_selected_outline', '显示选中轮廓', ''),
+            ('show_hover_outline', '显示悬停轮廓', ''),
+            ('show_floating_text', '显示浮动文字', ''),
+            ('show_interface_all', '显示全部界面', ''),
+            ('show_interface_replay', '显示重放界面', ''),
+            ('show_interface_score', '显示比分界面', ''),
+            ('show_interface_scoreboard', '显示记分板', ''),
+            ('show_interface_frames', '显示帧数', ''),
+            ('show_interface_minimap', '显示小地图', ''),
+            ('show_interface_timeline', '显示时间轴', ''),
+            ('show_interface_chat', '显示聊天', ''),
+            ('show_interface_target', '显示目标', ''),
+            ('show_interface_quests', '显示任务', ''),
+            ('show_interface_announce', '显示公告', ''),
+            ('show_healthbar_champions', '显示英雄血条', ''),
+            ('show_healthbar_structures', '显示建筑血条', ''),
+            ('show_healthbar_wards', '显示守卫血条', ''),
+            ('show_healthbar_pets', '显示宠物血条', ''),
+            ('show_healthbar_minions', '显示小兵血条', ''),
+            ('show_environment', '显示环境', ''),
+            ('show_characters', '显示角色', ''),
+            ('show_champions', '显示英雄', ''),
+            ('show_minions', '显示小兵', ''),
+            ('show_particles', '显示粒子特效', ''),
+            ('sequence_play', '播放序列', 'Ctrl+Space'),
+            ('sequence_apply', '应用序列', '\\'),
+            ('sequence_new', '新建序列', 'Ctrl+N'),
+            ('sequence_copy', '复制序列', ''),
+            ('sequence_clear', '清空序列', ''),
+            ('sequence_del_kf', '删除关键帧', 'Del'),
+            ('sequence_next_kf', '选择下一个关键帧', ''),
+            ('sequence_prev_kf', '选择上一个关键帧', ''),
+            ('sequence_adj_kf', '选择相邻关键帧', ''),
+            ('sequence_all_kf', '选择全部关键帧', 'Ctrl+A'),
+            ('sequence_seek_kf', '跳转到关键帧', ''),
+            ('sequence_undo', '序列撤销', 'Ctrl+Z'),
+            ('sequence_redo', '序列重做', 'Ctrl+Shift+Z'),
+            ('time_minus_120', '时间 -120 秒', ''),
+            ('time_minus_60', '时间 -60 秒', ''),
+            ('time_minus_30', '时间 -30 秒', ''),
+            ('time_minus_10', '时间 -10 秒', ''),
+            ('time_minus_5', '时间 -5 秒', ''),
+            ('time_plus_5', '时间 +5 秒', ''),
+            ('time_plus_10', '时间 +10 秒', ''),
+            ('time_plus_30', '时间 +30 秒', ''),
+            ('time_plus_60', '时间 +60 秒', ''),
+            ('time_plus_120', '时间 +120 秒', ''),
+            ('kf_position', '关键帧位置', '+'),
+            ('kf_rotation', '关键帧旋转', '+'),
+            ('kf_speed', '关键帧速度', ''),
+            ('kf_fov', '关键帧视野', ''),
+            ('kf_near_clip', '关键帧近裁剪面', ''),
+            ('kf_far_clip', '关键帧远裁剪面', ''),
+            ('kf_nav_grid', '关键帧导航网格偏移', ''),
+            ('kf_sky_rotation', '关键帧天空旋转', ''),
+            ('kf_sky_radius', '关键帧天空半径', ''),
+            ('kf_sky_offset', '关键帧天空偏移', ''),
+            ('kf_sun_direction', '关键帧太阳方向', ''),
+            ('kf_depth_fog_enable', '关键帧深度雾开关', ''),
+            ('kf_depth_fog_start', '关键帧深度雾起始', ''),
+            ('kf_depth_fog_end', '关键帧深度雾结束', ''),
+            ('kf_depth_fog_intensity', '关键帧深度雾强度', ''),
+            ('kf_depth_fog_color', '关键帧深度雾颜色', ''),
+            ('kf_height_fog_enable', '关键帧高度雾开关', ''),
+            ('kf_height_fog_start', '关键帧高度雾起始', ''),
+            ('kf_height_fog_end', '关键帧高度雾结束', ''),
+            ('kf_height_fog_intensity', '关键帧高度雾强度', ''),
+            ('kf_height_fog_color', '关键帧高度雾颜色', ''),
+            ('kf_dof_enabled', '关键帧景深开关', ''),
+            ('kf_dof_circle', '关键帧景深圆形', ''),
+            ('kf_dof_width', '关键帧景深宽度', ''),
+            ('kf_dof_near', '关键帧景深近处', ''),
+            ('kf_dof_mid', '关键帧景深中间', ''),
+            ('kf_dof_far', '关键帧景深远处', ''),
         ])
 
     def addWindow(self, widget, name):
