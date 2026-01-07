@@ -38,8 +38,11 @@ class Resource(QObject):
         else:
             super(Resource, self).__setattr__(name, value)
 
-    def sslErrors(self, response, errors):
-        allowed = [QSslError.CertificateUntrusted, QSslError.HostNameMismatch]
+   def sslErrors(self, response, errors):
+        allowed = [QSslError.CertificateUntrusted,
+        QSslError.HostNameMismatch,
+        QSslError.CertificateExpired,
+        QSslError.CertificateNotYetValid]
         response.ignoreSslErrors([e for e in errors if e.error() in allowed])
 
     def manager(self):
