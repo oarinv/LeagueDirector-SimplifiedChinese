@@ -930,7 +930,6 @@ class LeagueDirector(object):
         self.addWindow(RecordingWindow(self.api), 'recording')
         self.addWindow(KeybindingsWindow(self.bindings), 'bindings')
         self.addWindow(ConnectWindow(), 'connect')
-        self.addWindow(UpdateWindow(), 'update')
         self.window.setCentralWidget(self.mdi)
         self.window.setWindowTitle('英雄联盟导演工具')
         self.window.setWindowIcon(QIcon(respath('icon.ico')))
